@@ -124,7 +124,7 @@ All requirements of the TP have been implemented:
 
 ![First](./mongodb_terminal_commands_1.png)
 
-![Second](./mongodb_terminal_commands_1.png)
+![Second](./mongodb_terminal_commands_2.png)
 
-![Third](./mongodb_terminal_commands_1.png)
+![Third](./mongodb_terminal_commands_3.png)
 
