@@ -4,7 +4,7 @@
 
 ### MongoDB Server Started
 
-![MongoDB Server](./screenshots/mongodb_server_start.png)
+![MongoDB Server](./mongodb_server_start.png)
 
 # 🗂️ TP 05 - NoSQL Databases: MongoDB
 
