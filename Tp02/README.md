@@ -72,5 +72,5 @@ Three data reading techniques were evaluated:
 
 ### The result Capture
 
-![TheResult](./TheResult.png)
+![TheResult](./TheResult.jpg)
 

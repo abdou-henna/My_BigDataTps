@@ -102,7 +102,7 @@ The project was containerized and successfully run using **Docker**, ensuring a 
      docker build -t tp3-image .
      ```
 
-![DockerImageBuild](./DockerImageBuild.png)
+![DockerImageBuild](./DockerImageBuild.PNG)
 
 
 3. **Connexion à Docker Hub**
@@ -158,11 +158,11 @@ The project was containerized and successfully run using **Docker**, ensuring a 
 
 ### The result Capture
 
-![ImageInTheDockerHub](./ImageInTheDockerHub.png)
+![ImageInTheDockerHub](./ImageInTheDockerHub.PNG)
 
 
-![TheResultDoker](./TheResultDoker.png)
+![TheResultDoker](./TheResultDoker.PNG)
 
 
-![3ContainersInTheSameNetwork,](./3ContainersInTheSameNetwork,.png)
+![3ContainersInTheSameNetwork,](./3ContainersInTheSameNetwork,.PNG)
 
