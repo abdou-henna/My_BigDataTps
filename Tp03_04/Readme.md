@@ -84,3 +84,62 @@ The project was containerized and successfully run using **Docker**, ensuring a 
 - `requirements.txt`: Python dependencies for the notebook.
 
 ---
+
+### ✅ Étapes Réalisées
+
+1. **Création d’un compte Docker Hub**
+   - Compte Docker créé sur [hub.docker.com](https://hub.docker.com)
+
+2. **Création de l’image Docker**
+   - Un `Dockerfile` a été préparé pour encapsuler le code de TP3 (analyse de données avec `pandas`, `dask`, etc.).
+   - L’image a été construite avec la commande :
+     ```bash
+     docker build -t tp3-image .
+     ```
+
+3. **Connexion à Docker Hub**
+   ```bash
+   docker login
+   ```
+
+4. **Tag et Push de l’image**
+   ```bash
+   docker tag tp3-image <votre-username>/tp3-image
+   docker push <votre-username>/tp3-image
+   ```
+
+5. **Pull de l’image Docker sur une autre machine**
+   ```bash
+   docker pull <votre-username>/tp3-image
+   ```
+
+---
+
+### 🧱 Déploiement de plusieurs conteneurs
+
+6. **Création d’un réseau Docker**
+   ```bash
+   docker network create tp3-network
+   ```
+
+7. **Lancement de trois conteneurs à partir de l’image**
+   ```bash
+   docker run -d --name tp3_container1 --network tp3-network -p 8001:8000 <votre-username>/tp3-image
+   docker run -d --name tp3_container2 --network tp3-network -p 8002:8000 <votre-username>/tp3-image
+   docker run -d --name tp3_container3 --network tp3-network -p 8003:8000 <votre-username>/tp3-image
+   ```
+
+8. **Vérification du bon fonctionnement des conteneurs**
+   ```bash
+   docker ps
+   ```
+
+---
+
+### 📝 Remarques
+
+- Les ports sont mappés pour accéder aux conteneurs individuellement.
+- Le réseau `tp3-network` permet la communication entre conteneurs.
+- L’image contient tous les packages nécessaires (`pandas`, `dask`, `sklearn`, etc.) grâce au `requirements.txt`.
+
+---
