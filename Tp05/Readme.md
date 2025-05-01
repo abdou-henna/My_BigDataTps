@@ -117,7 +117,6 @@ All requirements of the TP have been implemented:
 - Server and client launched correctly
 - Collection and documents created
 - CRUD operations performed successfully
-```
 
 ---
 
