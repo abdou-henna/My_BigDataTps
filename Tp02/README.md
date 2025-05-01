@@ -66,3 +66,11 @@ Three data reading techniques were evaluated:
 - dask
 - tracemalloc
 - psutil
+
+
+---
+
+### The result Capture
+
+![TheResult](./TheResult.png)
+

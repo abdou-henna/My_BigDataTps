@@ -59,6 +59,11 @@ Using the **available visual types in Power BI** (as shown in the provided scree
 - **Columns**: `star_rating`, `helpful_votes`, `total_votes`, `verified_purchase`, `is_positive`
 - **Purpose**: Display detailed data in a structured format.
 
+### The result Capture
+
+![PowerBiCharts](./PowerBiCharts.PNG)
+
+
 ---
 
 #### ✅ Conclusion
@@ -97,6 +102,9 @@ The project was containerized and successfully run using **Docker**, ensuring a 
      docker build -t tp3-image .
      ```
 
+![DockerImageBuild](./DockerImageBuild.png)
+
+
 3. **Connexion à Docker Hub**
    ```bash
    docker login
@@ -134,6 +142,10 @@ The project was containerized and successfully run using **Docker**, ensuring a 
    docker ps
    ```
 
+
+![TheCmdCode](./TheCmdCode.png)
+
+
 ---
 
 ### 📝 Remarques
@@ -143,3 +155,14 @@ The project was containerized and successfully run using **Docker**, ensuring a 
 - L’image contient tous les packages nécessaires (`pandas`, `dask`, `sklearn`, etc.) grâce au `requirements.txt`.
 
 ---
+
+### The result Capture
+
+![ImageInTheDockerHub](./ImageInTheDockerHub.png)
+
+
+![TheResultDoker](./TheResultDoker.png)
+
+
+![3ContainersInTheSameNetwork,](./3ContainersInTheSameNetwork,.png)
+
