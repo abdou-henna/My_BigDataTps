@@ -1,0 +1,5 @@
+# Created at 2025-05-03T01:32:06.347
+Boot Manifest-JAR contains absolute paths in classpath 'D:\UniverStudy\MyBigDataTps\Tp09\spark-wordcount\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
