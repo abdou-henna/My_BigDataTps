@@ -198,7 +198,111 @@ Sample output:
 
 ---
 
+
+## Step 8: Spark Streaming Integration
+
+To simulate streaming, we extended our Spark project to include a **Spark Streaming job** using a local text socket as the input source. This allows Spark to process real-time text input from a server on port 9999.
+
+### Project Setup
+
+We added the following Maven dependency for Spark Streaming in `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>org.apache.spark</groupId>
+  <artifactId>spark-streaming_2.12</artifactId>
+  <version>3.5.0</version>
+</dependency>
+```
+
+### Main Streaming Class
+
+We created a new Java class `Stream.java` under package `spark.streaming.tp22` that counts words in real-time from a socket stream:
+
+```java
+package spark.streaming.tp22;
+
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.function.FlatMapFunction;
+import org.apache.spark.api.java.function.Function2;
+import org.apache.spark.api.java.function.PairFunction;
+import org.apache.spark.streaming.Durations;
+import org.apache.spark.streaming.api.java.JavaDStream;
+import org.apache.spark.streaming.api.java.JavaPairDStream;
+import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
+import org.apache.spark.streaming.api.java.JavaStreamingContext;
+import scala.Tuple2;
+
+import java.util.Arrays;
+
+public class Stream {
+    public static void main(String[] args) throws Exception {
+        SparkConf conf = new SparkConf().setAppName("SparkStreamingApp").setMaster("local[*]");
+        JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(5));
+
+        JavaReceiverInputDStream<String> lines = jssc.socketTextStream("localhost", 9999);
+        JavaDStream<String> words = lines.flatMap((FlatMapFunction<String, String>) line -> Arrays.asList(line.split(" ")).iterator());
+        JavaPairDStream<String, Integer> wordCounts = words
+                .mapToPair((PairFunction<String, String, Integer>) word -> new Tuple2<>(word, 1))
+                .reduceByKey((Function2<Integer, Integer, Integer>) Integer::sum);
+
+        wordCounts.print();
+        jssc.start();
+        jssc.awaitTermination();
+    }
+}
+```
+
+### Run Instructions
+
+1. Compile and package the JAR:
+
+```bash
+mvn clean package
+```
+
+2. Copy the JAR to `hadoop-master`:
+
+```bash
+docker cp target/stream-1.jar hadoop-master:/home/hduser/
+```
+
+3. Start a simple socket text stream server inside the master node (in a new terminal):
+
+```bash
+docker exec -it hadoop-master bash
+nc -lk 9999
+```
+
+4. From another terminal, run the Spark Streaming job:
+
+```bash
+docker exec -it hadoop-master bash
+spark-submit --class spark.streaming.tp22.Stream --master local /home/hduser/stream-1.jar
+```
+
+### Sample Output
+
+When typing words into the Netcat server (one line at a time), the terminal running `spark-submit` prints aggregated word counts every 5 seconds:
+
+**Image:**
+
+![spark streaming input](screenshots/spark_streaming_input.png)
+
+
+
+![spark streaming output](screenshots/spark_streaming_output.png)
+
+---
+
+
 ## Summary
 
-In this TP, we successfully extended our Hadoop Docker cluster from TP8 by installing and configuring **Apache Spark**. We verified the installation using `spark-shell` on YARN, developed a **Java Spark WordCount** program, and executed it in distributed mode using YARN. The successful output in HDFS confirms that Spark jobs are properly running on our cluster.
+This TP successfully integrates **both batch and streaming processing** using Apache Spark on our Hadoop YARN Docker cluster. We:
+
+* Installed and configured Spark across all nodes.
+* Executed a distributed WordCount job on HDFS using YARN.
+* Implemented a real-time word count streaming application via Spark Streaming and Netcat.
+
+This confirms our cluster can support both **batch and real-time data processing** with Spark.
 
